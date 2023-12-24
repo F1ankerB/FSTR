@@ -27,10 +27,16 @@ from rest.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/submit-data/', SubmitDataView.as_view(), name='submit-data'),
+    path('api/submit-data/<int:id>/', SubmitDataView.as_view(), name='submit-data-detail'),
     path('api/user/', UserView.as_view(), name='user'),
+    path('api/user/<int:id>/', UserView.as_view(), name='user-detail'),
     path('api/coords/', CoordsView.as_view(), name='coords'),
+    path('api/coords/<int:id>/', CoordsView.as_view(), name='coords-detail'),
     path('api/pereval-images/', PerevalImagesView.as_view(), name='pereval-images'),
+    path('api/pereval-images/<int:id>/', PerevalImagesView.as_view(), name='pereval-images-detail'),
     path('api/pereval-areas/', PerevalAreasView.as_view(), name='pereval-areas'),
+    path('api/pereval-areas/<int:id>/', PerevalAreasView.as_view(), name='pereval-areas-detail'),
     path('api/spr-activities-types/', SprActivitiesTypesView.as_view(), name='spr-activities-types'),
+    path('api/spr-activities-types/<int:id>/', SprActivitiesTypesView.as_view(), name='spr-activities-types-detail'),
 ]
 
