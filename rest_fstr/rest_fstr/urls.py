@@ -24,6 +24,20 @@ from rest.views import (
     PerevalAreasView,
     SprActivitiesTypesView,
 )
+from django.urls import re_path
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="API Documentation",
+      default_version='v1',
+      description="API documentation for the project",
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/submit-data/', SubmitDataView.as_view(), name='submit-data'),
@@ -38,5 +52,8 @@ urlpatterns = [
     path('api/pereval-areas/<int:id>/', PerevalAreasView.as_view(), name='pereval-areas-detail'),
     path('api/spr-activities-types/', SprActivitiesTypesView.as_view(), name='spr-activities-types'),
     path('api/spr-activities-types/<int:id>/', SprActivitiesTypesView.as_view(), name='spr-activities-types-detail'),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
